@@ -1,48 +1,63 @@
+
+function handleScrollAndAlign(button) {
+  const direction = button.getAttribute("data-direction");
+  const targetSelector = button.getAttribute("data-target"); 
+  const container = document.querySelector(targetSelector);
+
+  if (!container) {
+    console.error("스크롤 컨테이너를 찾을 수 없습니다:", targetSelector);
+    return;
+  }
+
+  // 정렬 상태 설정
+  const cards = container.querySelectorAll(".works-card");
+  if (cards.length < 3) {
+    container.style.justifyContent = "center"; 
+  } else {
+    container.style.justifyContent = "flex-start";
+  }
+
+  if (direction === "left") {
+    scrollLeft(container);
+  } else if (direction === "right") {
+    scrollRight(container);
+  }
+}
+
 function scrollLeft(container) {
   container.scrollBy({
-    left: -300,
-    behavior: 'smooth',
+    left: -520,
+    behavior: "smooth",
   });
 }
 
 function scrollRight(container) {
   container.scrollBy({
-    left: 300,
-    behavior: 'smooth',
+    left: 520,
+    behavior: "smooth",
   });
 
   if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
     setTimeout(() => {
       container.scrollTo({
         left: 0,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }, 300);
   }
 }
 
-// Handle button clicks
-document.querySelectorAll('.scroll-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    console.log('Button clicked');  // 버튼 클릭 시 확인
-    const direction = button.getAttribute('data-direction');
-    console.log(direction);
-    const targetSelector = button.getAttribute('data-target');
-    console.log(targetSelector);
-    const container = document.querySelector(targetSelector);
-    console.log(container);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".scroll-btn").forEach((button) => {
+    button.addEventListener("click", () => handleScrollAndAlign(button));
+  });
 
-    if (direction === 'left') {
-      scrollLeft(container);
-    } else if (direction === 'right') {
-      scrollRight(container);
+  document.querySelectorAll(".works-cards").forEach((container) => {
+    const cards = container.querySelectorAll(".works-card");
+    if (cards.length < 3) {
+      container.style.justifyContent = "center";
+    } else {
+      container.style.justifyContent = "flex-start";
     }
   });
-});
-
-// 모든 .works-cards 요소를 가져와서 자동 스크롤 설정
-document.querySelectorAll('.works-cards').forEach(container => {
-  setInterval(() => {
-    scrollRight(container); // 각 컨테이너별로 오른쪽으로 스크롤
-  }, 5000); // 5초마다 실행
 });
