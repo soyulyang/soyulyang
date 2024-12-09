@@ -47,6 +47,12 @@ function scrollRight(container) {
   }
 }
 
+document.querySelectorAll('.works-cards').forEach(container => {
+  setInterval(() => {
+    scrollRight(container); 
+  }, 5000); 
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".scroll-btn").forEach((button) => {
     button.addEventListener("click", () => handleScrollAndAlign(button));
