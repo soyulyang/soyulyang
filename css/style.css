@@ -394,10 +394,7 @@ text-align: center;
 .works-cards {
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
-=======
   text-align: center;
->>>>>>> 7371e31 (edit carddesign)
   overflow-x: hidden; 
   gap: 20px;
   padding: 20px;
